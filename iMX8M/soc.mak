@@ -58,7 +58,7 @@ DDR_FW_VERSION = _201810
 CAPSULE_GUID = cbabf44d-12cc-45dd-b0c5-29c5b7422d34
 else ifeq ($(SOC),iMX8MP)
 PLAT = imx8mp
-HDMI = no
+HDMI = yes
 SPL_LOAD_ADDR = 0x920000
 SPL_FSPI_LOAD_ADDR = 0x920000
 TEE_LOAD_ADDR =  0x56000000
@@ -146,9 +146,7 @@ u-boot-atf-tee.bin: u-boot.bin bl31.bin $(TEE)
 clean:
 	@rm -f $(MKIMG) u-boot-atf.bin u-boot-atf-tee.bin u-boot-spl-ddr.bin u-boot.itb u-boot.its u-boot-ddr3l.itb u-boot-ddr3l.its u-boot-spl-ddr3l.bin u-boot-ddr4.itb u-boot-ddr4.its u-boot-spl-ddr4.bin u-boot-ddr4-evk.itb u-boot-ivt.itb u-boot-ddr4-evk.its $(OUTIMG)
 
-dtb = evk.dtb
-$(dtb):
-	./$(DTB_PREPROC) $(PLAT)-evk.dtb $(dtb) $(dtbs)
+dtb = $(dtbs)
 
 u-boot.itb: $(dtb) $(supp_dtbs)
 	./$(PAD_IMAGE) $(TEE)
